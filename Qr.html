@@ -4,18 +4,37 @@
 <meta charset="UTF-8">
 <title>Redirecting...</title>
 <script>
-function redirect() {
-    var ua = navigator.userAgent.toLowerCase();
+function isAndroid() {
+    var ua = navigator.userAgent || "";
+    return /android/i.test(ua);
+}
 
-    if (ua.indexOf("android") > -1) {
-        window.location.replace("https://play.google.com/store/apps/details?id=com.saral_info.moneymakerapi.stockology&hl=en-US");
-    } 
-    else if (ua.indexOf("iphone") > -1 || ua.indexOf("ipad") > -1) {
-        window.location.replace("https://apps.apple.com/us/app/stockology/id6759705199");
-    } 
-    else {
-        window.location.replace("https://play.google.com/store/apps/details?id=com.saral_info.moneymakerapi.stockology&hl=en-US");
+function isIOS() {
+    var ua = navigator.userAgent || "";
+    var platform = navigator.platform || "";
+    var touchPoints = navigator.maxTouchPoints || 0;
+
+    return /iphone|ipad|ipod/i.test(ua) ||
+           /iphone|ipad|ipod/i.test(platform) ||
+           (/macintosh/i.test(ua) && touchPoints > 1) ||
+           (platform === "MacIntel" && touchPoints > 1);
+}
+
+function redirect() {
+    var playStoreUrl = "https://play.google.com/store/apps/details?id=com.saral_info.moneymakerapi.stockology&hl=en-US";
+    var appStoreUrl = "https://apps.apple.com/us/app/stockology/id6759705199";
+
+    if (isIOS()) {
+        window.location.replace(appStoreUrl);
+        return;
     }
+
+    if (isAndroid()) {
+        window.location.replace(playStoreUrl);
+        return;
+    }
+
+    window.location.replace(playStoreUrl);
 }
 </script>
 </head>
