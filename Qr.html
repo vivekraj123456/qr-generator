@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+if (/android/i.test(userAgent)) {
+    window.location.href = "https://play.google.com/store/apps/details?id=com.saral_info.moneymakerapi.stockology&hl=en-US";
+}
+else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    window.location.href = "https://apps.apple.com/us/app/stockology/id6759705199";
+}
+else {
+    window.location.href = "https://play.google.com/store/apps/details?id=com.saral_info.moneymakerapi.stockology&hl=en-US";
+}
+</script>
+</head>
+<body>
+Redirecting...
+</body>
+</html>
